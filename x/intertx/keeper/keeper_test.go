@@ -14,7 +14,7 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v3/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/ibc-go/v3/testing"
 
-	icaapp "github.com/TERITORI/teritori-chain/app"
+	icaapp "github.com/FANFURY/fanfury-chain/app"
 	"github.com/cosmos/cosmos-sdk/simapp"
 )
 
@@ -23,7 +23,7 @@ var (
 	// TODO: update crypto.AddressHash() when sdk uses address.Module()
 	TestAccAddress = icatypes.GenerateAddress(sdk.AccAddress(crypto.AddressHash([]byte(icatypes.ModuleName))), ibctesting.FirstConnectionID, TestPortID)
 	// TestOwnerAddress defines a reusable bech32 address for testing purposes
-	TestOwnerAddress = "tori1665x2fj8xyez0vqxs5pjhc6e7ktmmrx9dz864d"
+	TestOwnerAddress = "fury1665x2fj8xyez0vqxs5pjhc6e7ktmmrx9laeuaj"
 	// TestPortID defines a resuable port identifier for testing purposes
 	TestPortID, _ = icatypes.NewControllerPortID(TestOwnerAddress)
 	// TestVersion defines a resuable interchainaccounts version string for testing purposes
@@ -41,7 +41,7 @@ func init() {
 func SetupICATestingApp() (ibctesting.TestingApp, map[string]json.RawMessage) {
 	db := dbm.NewMemDB()
 	encCdc := icaapp.MakeEncodingConfig()
-	app := icaapp.NewTeritoriApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, icaapp.DefaultNodeHome, 5, encCdc, simapp.EmptyAppOptions{})
+	app := icaapp.NewFanfuryApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, icaapp.DefaultNodeHome, 5, encCdc, simapp.EmptyAppOptions{})
 	return app, icaapp.NewDefaultGenesisState()
 }
 
@@ -56,10 +56,10 @@ type KeeperTestSuite struct {
 	chainB *ibctesting.TestChain
 }
 
-func (suite *KeeperTestSuite) GetICAApp(chain *ibctesting.TestChain) *icaapp.TeritoriApp {
-	app, ok := chain.App.(*icaapp.TeritoriApp)
+func (suite *KeeperTestSuite) GetICAApp(chain *ibctesting.TestChain) *icaapp.FanfuryApp {
+	app, ok := chain.App.(*icaapp.FanfuryApp)
 	if !ok {
-		panic("not teritori app")
+		panic("not fanfury app")
 	}
 
 	return app

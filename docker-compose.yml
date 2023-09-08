@@ -1,58 +1,58 @@
 version: "3"
 
 services:
-  teritoridnode0:
-    container_name: teritoridnode0
-    image: "tendermint/teritoridnode"
+  fanfurydnode0:
+    container_name: fanfurydnode0
+    image: "tendermint/fanfurydnode"
     ports:
       - "26656-26657:26656-26657"
     environment:
       - ID=0
-      - LOG=${LOG:-teritorid.log}
+      - LOG=${LOG:-fanfuryd.log}
     volumes:
-      - ./build:/teritorid:Z
+      - ./build:/fanfuryd:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.2
 
-  teritoridnode1:
-    container_name: teritoridnode1
-    image: "tendermint/teritoridnode"
+  fanfurydnode1:
+    container_name: fanfurydnode1
+    image: "tendermint/fanfurydnode"
     ports:
       - "26659-26660:26656-26657"
     environment:
       - ID=1
-      - LOG=${LOG:-teritorid.log}
+      - LOG=${LOG:-fanfuryd.log}
     volumes:
-      - ./build:/teritorid:Z
+      - ./build:/fanfuryd:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.3
 
-  teritoridnode2:
-    container_name: teritoridnode2
-    image: "tendermint/teritoridnode"
+  fanfurydnode2:
+    container_name: fanfurydnode2
+    image: "tendermint/fanfurydnode"
     environment:
       - ID=2
-      - LOG=${LOG:-teritorid.log}
+      - LOG=${LOG:-fanfuryd.log}
     ports:
       - "26661-26662:26656-26657"
     volumes:
-      - ./build:/teritorid:Z
+      - ./build:/fanfuryd:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.4
 
-  teritoridnode3:
-    container_name: teritoridnode3
-    image: "tendermint/teritoridnode"
+  fanfurydnode3:
+    container_name: fanfurydnode3
+    image: "tendermint/fanfurydnode"
     environment:
       - ID=3
-      - LOG=${LOG:-teritorid.log}
+      - LOG=${LOG:-fanfuryd.log}
     ports:
       - "26663-26664:26656-26657"
     volumes:
-      - ./build:/teritorid:Z
+      - ./build:/fanfuryd:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.5

@@ -7,10 +7,10 @@ import (
 	"os"
 	"time"
 
-	appparams "github.com/TERITORI/teritori-chain/app/params"
-	"github.com/TERITORI/teritori-chain/x/airdrop/types"
-	airdroptypes "github.com/TERITORI/teritori-chain/x/airdrop/types"
-	minttypes "github.com/TERITORI/teritori-chain/x/mint/types"
+	appparams "github.com/FANFURY/fanfury-chain/app/params"
+	"github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	airdroptypes "github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	minttypes "github.com/FANFURY/fanfury-chain/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/server"
@@ -41,9 +41,9 @@ func PrepareGenesisCmd(defaultNodeHome string, mbm module.BasicManager) *cobra.C
 		Short: "Prepare a genesis file with initial setup",
 		Long: `Prepare a genesis file with initial setup.
 Example:
-	teritorid prepare-genesis teritori-1 cosmos_aidrop.csv crew3_airdrop.csv evmos_orbital_ape.csv
+	fanfuryd prepare-genesis fanfury-1 cosmos_aidrop.csv crew3_airdrop.csv evmos_orbital_ape.csv
 	- Check input genesis:
-		file is at ~/.teritorid/config/genesis.json
+		file is at ~/.fanfuryd/config/genesis.json
 `,
 		Args: cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -219,10 +219,10 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 	bankGenState := banktypes.DefaultGenesisState()
 	bankGenState.Params = banktypes.DefaultParams()
 
-	bankGenState.Supply = sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 200_000_000_000_000)) // 200M TORI
+	bankGenState.Supply = sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 200_000_000_000_000)) // 200M FURY
 
 	airdropCoins := sdk.Coins{totalCosmosAirdropAllocation.Add(totalEvmosAirdropAllocataion)}
-	communityPoolCoins := sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 50_000_000_000_000)) // 50M TORI
+	communityPoolCoins := sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 50_000_000_000_000)) // 50M FURY
 
 	seenBalances := make(map[string]bool)
 
@@ -266,7 +266,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 	}
 	genAccounts = append(genAccounts, authtypes.NewBaseAccount(addrStrategicReserve, nil, 0, 0))
 
-	// send 10 TORI to genesis validators
+	// send 10 FURY to genesis validators
 	genesisValidators := []string{
 		"tori1uechzauku6mhj2je8jmyrkq6d0ydm3g4q470r0", // metahuahua
 		"tori1t7cyvydpp4lklprksnrjy2y3xzv3q2l0n4qqvn", // activenodes
@@ -313,15 +313,15 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 		"tori1cm3hmw63a9wugawf9jn2jv0savynkgu9ra9ggm", // stakingcabin
 		"tori1sqk72uwf6tg867ssuu7whxfu9pfcyrpe9u76c4", // stavr
 		"tori1lrq8sl2jq7246yjplutv5lul8ykrhqcr9frjz3", // stingray
-		"tori1gtz5v838vf7ucnn0jnqr3crs5099g9p2fnpe9p", // teritori-core-1
-		"tori1vxmq5epj83z8en5h0zul624nrmfxzmhkmwmmtl", // teritori-core-2
+		"tori1gtz5v838vf7ucnn0jnqr3crs5099g9p2fnpe9p", // fanfury-core-1
+		"tori1vxmq5epj83z8en5h0zul624nrmfxzmhkmwmmtl", // fanfury-core-2
 		"tori1x6vfjy754fvzrlug2kxsp6s54yfj753sheqpay", // web34ever
 		"tori1dfnzup7nppxvlpwnmzjnuet0tn4t9cnwhqx54s", // wetez
 		"tori1tjh6wpj6d9kpkfrcyglksevkhhtk9gm7auaxy3", // whispernode
 	}
 
 	totalValidatorInitialCoins := sdk.NewCoins()
-	validatorInitialCoins := sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 10_000_000)) // 10 TORI
+	validatorInitialCoins := sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 10_000_000)) // 10 FURY
 	for _, address := range genesisValidators {
 		if seenBalances[address] {
 			continue
@@ -329,7 +329,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 
 		bankGenState.Balances = append(bankGenState.Balances, banktypes.Balance{
 			Address: address,
-			Coins:   validatorInitialCoins, // 0.1 TORI
+			Coins:   validatorInitialCoins, // 0.1 FURY
 		})
 		addr, err := sdk.AccAddressFromBech32(address)
 		if err != nil {
@@ -341,7 +341,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 		seenBalances[address] = true
 	}
 
-	// send 0.1 TORI to bech32 converted cosmos airdrop addresses
+	// send 0.1 FURY to bech32 converted cosmos airdrop addresses
 	totalAirdropGasCoins := sdk.NewCoins()
 	airdropGasCoins := sdk.NewCoins(sdk.NewInt64Coin(appparams.BaseCoinUnit, 100_000))
 	for _, allocation := range cosmosAllocations {
@@ -361,7 +361,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 
 		bankGenState.Balances = append(bankGenState.Balances, banktypes.Balance{
 			Address: bech32Addr,
-			Coins:   airdropGasCoins, // 0.1 TORI
+			Coins:   airdropGasCoins, // 0.1 FURY
 		})
 		totalAirdropGasCoins = totalAirdropGasCoins.Add(airdropGasCoins...)
 		genAccounts = append(genAccounts, authtypes.NewBaseAccount(sdk.AccAddress(bz), nil, 0, 0))
@@ -423,7 +423,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 	govGenState := govtypes.DefaultGenesisState()
 	defaultGovParams := govtypes.DefaultParams()
 	govGenState.DepositParams = defaultGovParams.DepositParams
-	govGenState.DepositParams.MinDeposit = sdk.Coins{sdk.NewInt64Coin(appparams.BaseCoinUnit, 500_000_000)} // 500 TORI
+	govGenState.DepositParams.MinDeposit = sdk.Coins{sdk.NewInt64Coin(appparams.BaseCoinUnit, 500_000_000)} // 500 FURY
 	govGenState.TallyParams = defaultGovParams.TallyParams
 	govGenState.VotingParams = defaultGovParams.VotingParams
 	govGenState.VotingParams.VotingPeriod = time.Hour * 24 * 2 // 2 days
@@ -445,7 +445,7 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 
 	// crisis module genesis
 	crisisGenState := crisistypes.DefaultGenesisState()
-	crisisGenState.ConstantFee = sdk.NewInt64Coin(appparams.BaseCoinUnit, 1000_000) // 1 TORI
+	crisisGenState.ConstantFee = sdk.NewInt64Coin(appparams.BaseCoinUnit, 1000_000) // 1 FURY
 	crisisGenStateBz, err := cdc.MarshalJSON(crisisGenState)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to marshal crisis genesis state: %w", err)

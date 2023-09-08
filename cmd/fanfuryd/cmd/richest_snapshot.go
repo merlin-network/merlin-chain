@@ -57,7 +57,7 @@ func ExportRichestSnapshotCmd() *cobra.Command {
 		Short: "Export richest snapshot from genesis export",
 		Long: `Export richest snapshot from genesis export
 Example:
-	teritorid export-richest-snapshot ./snapshot-teritori-richest.json ./snapshot-teritori-richest.csv
+	fanfuryd export-richest-snapshot ./snapshot-fanfury-richest.json ./snapshot-fanfury-richest.csv
 `,
 		Args: cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -121,7 +121,7 @@ Example:
 						StakedBalance: sdk.ZeroInt(),
 					}
 				}
-				acc.Balance = balance.Coins.AmountOf("utori")
+				acc.Balance = balance.Coins.AmountOf("ufury")
 				snapshotAccs[balance.Address] = acc
 			}
 

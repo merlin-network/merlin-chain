@@ -1,4 +1,4 @@
-package teritori
+package fanfury
 
 import (
 	"encoding/json"

@@ -1,4 +1,4 @@
-package teritori
+package fanfury
 
 import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"

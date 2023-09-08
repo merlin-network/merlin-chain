@@ -1,4 +1,4 @@
-package teritori
+package fanfury
 
 import (
 	"fmt"
@@ -9,17 +9,17 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/TERITORI/teritori-chain/app/keepers"
-	"github.com/TERITORI/teritori-chain/app/upgrades"
-	v130 "github.com/TERITORI/teritori-chain/app/upgrades/v130"
-	v131 "github.com/TERITORI/teritori-chain/app/upgrades/v131"
-	v140 "github.com/TERITORI/teritori-chain/app/upgrades/v140"
-	airdrop "github.com/TERITORI/teritori-chain/x/airdrop"
-	airdropkeeper "github.com/TERITORI/teritori-chain/x/airdrop/keeper"
-	airdroptypes "github.com/TERITORI/teritori-chain/x/airdrop/types"
-	"github.com/TERITORI/teritori-chain/x/mint"
-	mintkeeper "github.com/TERITORI/teritori-chain/x/mint/keeper"
-	minttypes "github.com/TERITORI/teritori-chain/x/mint/types"
+	"github.com/FANFURY/fanfury-chain/app/keepers"
+	"github.com/FANFURY/fanfury-chain/app/upgrades"
+	v130 "github.com/FANFURY/fanfury-chain/app/upgrades/v130"
+	v131 "github.com/FANFURY/fanfury-chain/app/upgrades/v131"
+	v140 "github.com/FANFURY/fanfury-chain/app/upgrades/v140"
+	airdrop "github.com/FANFURY/fanfury-chain/x/airdrop"
+	airdropkeeper "github.com/FANFURY/fanfury-chain/x/airdrop/keeper"
+	airdroptypes "github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	"github.com/FANFURY/fanfury-chain/x/mint"
+	mintkeeper "github.com/FANFURY/fanfury-chain/x/mint/keeper"
+	minttypes "github.com/FANFURY/fanfury-chain/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
@@ -112,11 +112,11 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	intertx "github.com/TERITORI/teritori-chain/x/intertx"
-	intertxkeeper "github.com/TERITORI/teritori-chain/x/intertx/keeper"
-	intertxtypes "github.com/TERITORI/teritori-chain/x/intertx/types"
+	intertx "github.com/FANFURY/fanfury-chain/x/intertx"
+	intertxkeeper "github.com/FANFURY/fanfury-chain/x/intertx/keeper"
+	intertxtypes "github.com/FANFURY/fanfury-chain/x/intertx/types"
 
-	teritoriappparams "github.com/TERITORI/teritori-chain/app/params"
+	fanfuryappparams "github.com/FANFURY/fanfury-chain/app/params"
 	"github.com/strangelove-ventures/packet-forward-middleware/v2/router"
 	routerkeeper "github.com/strangelove-ventures/packet-forward-middleware/v2/router/keeper"
 	routertypes "github.com/strangelove-ventures/packet-forward-middleware/v2/router/types"
@@ -130,7 +130,7 @@ import (
 	_ "github.com/cosmos/cosmos-sdk/client/docs/statik"
 )
 
-const appName = "TeritoriApp"
+const appName = "FanfuryApp"
 
 var (
 	// If EnabledSpecificProposals is "", and this is "true", then enable all x/wasm proposals.
@@ -243,14 +243,14 @@ var (
 )
 
 var (
-	_ simapp.App              = (*TeritoriApp)(nil)
-	_ servertypes.Application = (*TeritoriApp)(nil)
+	_ simapp.App              = (*FanfuryApp)(nil)
+	_ servertypes.Application = (*FanfuryApp)(nil)
 )
 
-// TeritoriApp extends an ABCI application, but with most of its parameters exported.
+// FanfuryApp extends an ABCI application, but with most of its parameters exported.
 // They are exported for convenience in creating helper functions, as object
 // capabilities aren't needed for testing.
-type TeritoriApp struct { // nolint: golint
+type FanfuryApp struct { // nolint: golint
 	*baseapp.BaseApp
 	keepers.AppKeepers
 
@@ -279,21 +279,21 @@ func init() {
 		stdlog.Println("Failed to get home dir %2", err)
 	}
 
-	DefaultNodeHome = filepath.Join(userHomeDir, ".teritorid")
+	DefaultNodeHome = filepath.Join(userHomeDir, ".fanfuryd")
 }
 
-// NewTeritoriApp returns a reference to an initialized NxtPop.
-func NewTeritoriApp(
+// NewFanfuryApp returns a reference to an initialized NxtPop.
+func NewFanfuryApp(
 	logger log.Logger,
 	db dbm.DB, traceStore io.Writer,
 	loadLatest bool,
 	skipUpgradeHeights map[int64]bool,
 	homePath string,
 	invCheckPeriod uint,
-	encodingConfig teritoriappparams.EncodingConfig,
+	encodingConfig fanfuryappparams.EncodingConfig,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *TeritoriApp {
+) *FanfuryApp {
 
 	appCodec := encodingConfig.Marshaler
 	legacyAmino := encodingConfig.Amino
@@ -319,7 +319,7 @@ func NewTeritoriApp(
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
 
-	app := &TeritoriApp{
+	app := &FanfuryApp{
 		BaseApp:           bApp,
 		legacyAmino:       legacyAmino,
 		appCodec:          appCodec,
@@ -778,20 +778,20 @@ func NewTeritoriApp(
 }
 
 // Name returns the name of the App
-func (app *TeritoriApp) Name() string { return app.BaseApp.Name() }
+func (app *FanfuryApp) Name() string { return app.BaseApp.Name() }
 
 // BeginBlocker application updates every begin block
-func (app *TeritoriApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *FanfuryApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker application updates every end block
-func (app *TeritoriApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *FanfuryApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // InitChainer application update at chain initialization
-func (app *TeritoriApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *FanfuryApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState GenesisState
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -803,12 +803,12 @@ func (app *TeritoriApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) 
 }
 
 // LoadHeight loads a particular height
-func (app *TeritoriApp) LoadHeight(height int64) error {
+func (app *FanfuryApp) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
 // ModuleAccountAddrs returns all the app's module account addresses.
-func (app *TeritoriApp) ModuleAccountAddrs() map[string]bool {
+func (app *FanfuryApp) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		modAccAddrs[authtypes.NewModuleAddress(acc).String()] = true
@@ -817,11 +817,11 @@ func (app *TeritoriApp) ModuleAccountAddrs() map[string]bool {
 	return modAccAddrs
 }
 
-// LegacyAmino returns TeritoriApp's amino codec.
+// LegacyAmino returns FanfuryApp's amino codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *TeritoriApp) LegacyAmino() *codec.LegacyAmino {
+func (app *FanfuryApp) LegacyAmino() *codec.LegacyAmino {
 	return app.legacyAmino
 }
 
@@ -829,52 +829,52 @@ func (app *TeritoriApp) LegacyAmino() *codec.LegacyAmino {
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *TeritoriApp) AppCodec() codec.Codec {
+func (app *FanfuryApp) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
 // InterfaceRegistry returns NxtPop's InterfaceRegistry
-func (app *TeritoriApp) InterfaceRegistry() types.InterfaceRegistry {
+func (app *FanfuryApp) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
 // GetKey returns the KVStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *TeritoriApp) GetKey(storeKey string) *sdk.KVStoreKey {
+func (app *FanfuryApp) GetKey(storeKey string) *sdk.KVStoreKey {
 	return app.keys[storeKey]
 }
 
 // GetTKey returns the TransientStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *TeritoriApp) GetTKey(storeKey string) *sdk.TransientStoreKey {
+func (app *FanfuryApp) GetTKey(storeKey string) *sdk.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
 // GetMemKey returns the MemStoreKey for the provided mem key.
 //
 // NOTE: This is solely used for testing purposes.
-func (app *TeritoriApp) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
+func (app *FanfuryApp) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
 // GetSubspace returns a param subspace for a given module name.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *TeritoriApp) GetSubspace(moduleName string) paramstypes.Subspace {
+func (app *FanfuryApp) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
 // SimulationManager implements the SimulationApp interface
-func (app *TeritoriApp) SimulationManager() *module.SimulationManager {
+func (app *FanfuryApp) SimulationManager() *module.SimulationManager {
 	return app.sm
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *TeritoriApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *FanfuryApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	rpc.RegisterRoutes(clientCtx, apiSvr.Router)
 	// Register legacy tx routes.
@@ -895,37 +895,37 @@ func (app *TeritoriApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.A
 }
 
 // RegisterTxService implements the Application.RegisterTxService method.
-func (app *TeritoriApp) RegisterTxService(clientCtx client.Context) {
+func (app *FanfuryApp) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
 // RegisterTendermintService implements the Application.RegisterTendermintService method.
-func (app *TeritoriApp) RegisterTendermintService(clientCtx client.Context) {
+func (app *FanfuryApp) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.interfaceRegistry)
 }
 
 // GetBaseApp implements the BaseApp
-func (app *TeritoriApp) GetBaseApp() *baseapp.BaseApp {
+func (app *FanfuryApp) GetBaseApp() *baseapp.BaseApp {
 	return app.BaseApp
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *TeritoriApp) GetStakingKeeper() stakingkeeper.Keeper {
+func (app *FanfuryApp) GetStakingKeeper() stakingkeeper.Keeper {
 	return app.StakingKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *TeritoriApp) GetIBCKeeper() *ibckeeper.Keeper {
+func (app *FanfuryApp) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *TeritoriApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
+func (app *FanfuryApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.ScopedIBCKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *TeritoriApp) GetTxConfig() client.TxConfig {
+func (app *FanfuryApp) GetTxConfig() client.TxConfig {
 	return MakeEncodingConfig().TxConfig
 }
 
@@ -973,7 +973,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 }
 
 // configure store loader that checks if version == upgradeHeight and applies store upgrades
-func (app *TeritoriApp) setupUpgradeStoreLoaders() {
+func (app *FanfuryApp) setupUpgradeStoreLoaders() {
 	upgradeInfo, err := app.UpgradeKeeper.ReadUpgradeInfoFromDisk()
 	if err != nil {
 		panic(fmt.Sprintf("failed to read upgrade info from disk %s", err))
@@ -990,7 +990,7 @@ func (app *TeritoriApp) setupUpgradeStoreLoaders() {
 	}
 }
 
-func (app *TeritoriApp) setupUpgradeHandlers() {
+func (app *FanfuryApp) setupUpgradeHandlers() {
 	for _, upgrade := range Upgrades {
 		app.UpgradeKeeper.SetUpgradeHandler(
 			upgrade.UpgradeName,

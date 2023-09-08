@@ -10,9 +10,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/TERITORI/teritori-chain/x/intertx/client/cli"
-	"github.com/TERITORI/teritori-chain/x/intertx/keeper"
-	"github.com/TERITORI/teritori-chain/x/intertx/types"
+	"github.com/FANFURY/fanfury-chain/x/intertx/client/cli"
+	"github.com/FANFURY/fanfury-chain/x/intertx/keeper"
+	"github.com/FANFURY/fanfury-chain/x/intertx/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

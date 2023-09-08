@@ -1,7 +1,7 @@
-package teritori
+package fanfury
 
 import (
-	"github.com/TERITORI/teritori-chain/app/params"
+	"github.com/FANFURY/fanfury-chain/app/params"
 
 	"github.com/cosmos/cosmos-sdk/std"
 )
