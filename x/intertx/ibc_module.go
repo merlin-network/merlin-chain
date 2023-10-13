@@ -3,7 +3,7 @@ package intertx
 import (
 	proto "github.com/gogo/protobuf/proto"
 
-	"github.com/FANFURY/fanfury-chain/x/intertx/keeper"
+	"github.com/furysport/fanfury-chain/x/intertx/keeper"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"

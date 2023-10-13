@@ -7,8 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	appparams "github.com/FANFURY/fanfury-chain/app/params"
-	airdroptypes "github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	appparams "github.com/furysport/fanfury-chain/app/params"
+	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"

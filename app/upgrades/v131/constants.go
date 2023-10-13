@@ -3,7 +3,7 @@ package v131
 import (
 	store "github.com/cosmos/cosmos-sdk/store/types"
 
-	"github.com/FANFURY/fanfury-chain/app/upgrades"
+	"github.com/furysport/fanfury-chain/app/upgrades"
 )
 
 const (

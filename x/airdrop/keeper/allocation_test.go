@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	"github.com/furysport/fanfury-chain/x/airdrop/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

@@ -3,8 +3,8 @@ package airdrop
 import (
 	"fmt"
 
-	"github.com/FANFURY/fanfury-chain/x/airdrop/keeper"
-	"github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	"github.com/furysport/fanfury-chain/x/airdrop/keeper"
+	"github.com/furysport/fanfury-chain/x/airdrop/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )

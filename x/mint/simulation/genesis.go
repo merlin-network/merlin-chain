@@ -5,7 +5,7 @@ package simulation
 import (
 	"math/rand"
 
-	"github.com/FANFURY/fanfury-chain/x/mint/types"
+	"github.com/furysport/fanfury-chain/x/mint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"

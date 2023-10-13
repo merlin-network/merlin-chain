@@ -1,7 +1,7 @@
 package fanfury
 
 import (
-	"github.com/FANFURY/fanfury-chain/app/params"
+	"github.com/furysport/fanfury-chain/app/params"
 
 	"github.com/cosmos/cosmos-sdk/std"
 )

@@ -1,11 +1,11 @@
-module github.com/FANFURY/fanfury-chain
+module github.com/furysport/fanfury-chain
 
 go 1.17
 
 require (
-	github.com/CosmWasm/wasmd v0.28.0
-	github.com/cosmos/cosmos-sdk v0.45.10
-	github.com/cosmos/ibc-go/v3 v3.4.0
+	github.com/CosmWasm/wasmd v0.27.0
+	github.com/cosmos/cosmos-sdk v0.45.4
+	github.com/cosmos/ibc-go/v3 v3.0.0
 	github.com/ethereum/go-ethereum v1.10.16
 	github.com/gagliardetto/solana-go v1.2.0
 	github.com/gogo/protobuf v1.3.3

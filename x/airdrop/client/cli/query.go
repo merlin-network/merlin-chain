@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/FANFURY/fanfury-chain/x/airdrop/types"
+	"github.com/furysport/fanfury-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"

@@ -31,8 +31,8 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	fanfury "github.com/FANFURY/fanfury-chain/app"
-	"github.com/FANFURY/fanfury-chain/app/params"
+	fanfury "github.com/furysport/fanfury-chain/app"
+	"github.com/furysport/fanfury-chain/app/params"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the

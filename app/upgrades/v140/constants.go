@@ -3,8 +3,8 @@ package v130
 import (
 	store "github.com/cosmos/cosmos-sdk/store/types"
 
-	"github.com/FANFURY/fanfury-chain/app/upgrades"
-	intertxtypes "github.com/FANFURY/fanfury-chain/x/intertx/types"
+	"github.com/furysport/fanfury-chain/app/upgrades"
+	intertxtypes "github.com/furysport/fanfury-chain/x/intertx/types"
 	icacontrollertypes "github.com/cosmos/ibc-go/v3/modules/apps/27-interchain-accounts/controller/types"
 )
 

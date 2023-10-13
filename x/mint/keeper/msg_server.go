@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/FANFURY/fanfury-chain/x/mint/types"
+	"github.com/furysport/fanfury-chain/x/mint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )

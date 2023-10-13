@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	fanfury "github.com/FANFURY/fanfury-chain/app"
+	fanfury "github.com/furysport/fanfury-chain/app"
 
-	"github.com/FANFURY/fanfury-chain/app/helpers"
+	"github.com/furysport/fanfury-chain/app/helpers"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	"github.com/tendermint/tendermint/libs/rand"
