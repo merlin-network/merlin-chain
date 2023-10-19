@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	simapp "github.com/furysport/fanfury-chain/app"
+	simapp "github.com/merlin-network/merlin-chain/app"
 )
 
 const (
@@ -22,7 +22,7 @@ type KeeperTestSuite struct {
 
 	legacyAmino *codec.LegacyAmino
 	ctx         sdk.Context
-	app         *simapp.FanfuryApp
+	app         *simapp.MerlinApp
 }
 
 func (suite *KeeperTestSuite) SetupTest() {

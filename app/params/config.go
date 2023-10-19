@@ -6,12 +6,12 @@ import (
 
 const (
 	HumanCoinUnit = "FURY"
-	BaseCoinUnit  = "ufury"
+	BaseCoinUnit  = "umerlin"
 
 	DefaultBondDenom = BaseCoinUnit
 
 	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
-	Bech32PrefixAccAddr = "fury"
+	Bech32PrefixAccAddr = "merlin"
 )
 
 var (

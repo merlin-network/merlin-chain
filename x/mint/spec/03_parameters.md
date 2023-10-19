@@ -4,7 +4,7 @@ The minting module contains the following parameters:
 
 | Key                                        | Type         | Example                                |
 | ------------------------------------------ | ------------ | -------------------------------------- |
-| mint_denom                                 | string       | "ufury"                                |
+| mint_denom                                 | string       | "umerlin"                                |
 | genesis_block_provisions                   | string (dec) | "500000000"                            |
 | reduction_period_in_blocks                 | int64        | 156                                    |
 | reduction_factor                           | string (dec) | "0.6666666666666"                      |
@@ -39,7 +39,7 @@ Below are all the network parameters for the `mint` module:
 
 **Notes**
 
-1. `mint_denom` defines denom for minting token - ufury
+1. `mint_denom` defines denom for minting token - umerlin
 2. `genesis_block_provisions` provides minting tokens per block at genesis.
 3. `reduction_period_in_blocks` defines the number of blocks to pass to reduce the mint amount
 4. `reduction_factor` defines the reduction factor of tokens at every `reduction_period_in_blocks`

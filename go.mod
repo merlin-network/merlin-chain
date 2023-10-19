@@ -1,4 +1,4 @@
-module github.com/furysport/fanfury-chain
+module github.com/merlin-network/merlin-chain
 
 go 1.17
 
@@ -76,11 +76,11 @@ require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gagliardetto/binary v0.6.1 // indirect
 	github.com/gagliardetto/treeout v0.1.4 // indirect
-	github.com/gin-gonic/gin v1.7.0 // indirect
 	github.com/go-kit/kit v0.12.0 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
+	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
 	github.com/gogo/gateway v1.1.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect

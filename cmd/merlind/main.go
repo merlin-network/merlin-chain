@@ -6,9 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	app "github.com/furysport/fanfury-chain/app"
-	appparams "github.com/furysport/fanfury-chain/app/params"
-	"github.com/furysport/fanfury-chain/cmd/fanfuryd/cmd"
+	app "github.com/merlin-network/merlin-chain/app"
+	appparams "github.com/merlin-network/merlin-chain/app/params"
+	"github.com/merlin-network/merlin-chain/cmd/merlind/cmd"
 )
 
 func main() {

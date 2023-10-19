@@ -5,7 +5,7 @@ package simulation
 import (
 	"math/rand"
 
-	"github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/x/mint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
@@ -32,15 +32,15 @@ var (
 	}
 	weightedDevRewardReceivers = []types.MonthlyVestingAddress{
 		{
-			Address:        "fury1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
+			Address:        "merlin1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
 			MonthlyAmounts: []sdk.Int{sdk.NewInt(7000), sdk.NewInt(7000), sdk.NewInt(7000)},
 		},
 		{
-			Address:        "fury1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
+			Address:        "merlin1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
 			MonthlyAmounts: []sdk.Int{sdk.NewInt(2000), sdk.NewInt(2000), sdk.NewInt(2000)},
 		},
 		{
-			Address:        "fury1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
+			Address:        "merlin1g2escsu26508tgrpv865d80d62pvmw69qx5yrv",
 			MonthlyAmounts: []sdk.Int{sdk.NewInt(1000), sdk.NewInt(1000), sdk.NewInt(1000)},
 		},
 	}

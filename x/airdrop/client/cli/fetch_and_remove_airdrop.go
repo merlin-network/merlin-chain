@@ -7,8 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	appparams "github.com/furysport/fanfury-chain/app/params"
-	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
+	appparams "github.com/merlin-network/merlin-chain/app/params"
+	airdroptypes "github.com/merlin-network/merlin-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -65,7 +65,7 @@ func FetchAndRemoveAirdropCmd() *cobra.Command {
 		Short: "Fetch and remove airdrop allocation",
 		Long: `Fetch and remove airdrop allocation.
 Example:
-	fanfuryd tx airdrop fetch-and-remove-airdrop evmos_orbital_ape.csv stored_result.csv 0 500 --from=validator --keyring-backend=test --chain-id=fanfury-1 --home=$HOME/.fanfuryd/ --yes --broadcast-mode=block --gas=10000000
+	merlind tx airdrop fetch-and-remove-airdrop evmos_orbital_ape.csv stored_result.csv 0 500 --from=validator --keyring-backend=test --chain-id=merlin-1 --home=$HOME/.merlind/ --yes --broadcast-mode=block --gas=10000000
 `,
 		Args: cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {

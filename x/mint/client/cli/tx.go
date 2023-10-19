@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"

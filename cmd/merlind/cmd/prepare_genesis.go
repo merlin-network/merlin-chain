@@ -7,10 +7,10 @@ import (
 	"os"
 	"time"
 
-	appparams "github.com/furysport/fanfury-chain/app/params"
-	"github.com/furysport/fanfury-chain/x/airdrop/types"
-	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
-	minttypes "github.com/furysport/fanfury-chain/x/mint/types"
+	appparams "github.com/merlin-network/merlin-chain/app/params"
+	"github.com/merlin-network/merlin-chain/x/airdrop/types"
+	airdroptypes "github.com/merlin-network/merlin-chain/x/airdrop/types"
+	minttypes "github.com/merlin-network/merlin-chain/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/server"
@@ -41,9 +41,9 @@ func PrepareGenesisCmd(defaultNodeHome string, mbm module.BasicManager) *cobra.C
 		Short: "Prepare a genesis file with initial setup",
 		Long: `Prepare a genesis file with initial setup.
 Example:
-	fanfuryd prepare-genesis fanfury-1 cosmos_aidrop.csv crew3_airdrop.csv evmos_orbital_ape.csv
+	merlind prepare-genesis merlin-1 cosmos_aidrop.csv crew3_airdrop.csv evmos_orbital_ape.csv
 	- Check input genesis:
-		file is at ~/.fanfuryd/config/genesis.json
+		file is at ~/.merlind/config/genesis.json
 `,
 		Args: cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -313,8 +313,8 @@ func PrepareGenesis(clientCtx client.Context, appState map[string]json.RawMessag
 		"tori1cm3hmw63a9wugawf9jn2jv0savynkgu9ra9ggm", // stakingcabin
 		"tori1sqk72uwf6tg867ssuu7whxfu9pfcyrpe9u76c4", // stavr
 		"tori1lrq8sl2jq7246yjplutv5lul8ykrhqcr9frjz3", // stingray
-		"tori1gtz5v838vf7ucnn0jnqr3crs5099g9p2fnpe9p", // fanfury-core-1
-		"tori1vxmq5epj83z8en5h0zul624nrmfxzmhkmwmmtl", // fanfury-core-2
+		"tori1gtz5v838vf7ucnn0jnqr3crs5099g9p2fnpe9p", // merlin-core-1
+		"tori1vxmq5epj83z8en5h0zul624nrmfxzmhkmwmmtl", // merlin-core-2
 		"tori1x6vfjy754fvzrlug2kxsp6s54yfj753sheqpay", // web34ever
 		"tori1dfnzup7nppxvlpwnmzjnuet0tn4t9cnwhqx54s", // wetez
 		"tori1tjh6wpj6d9kpkfrcyglksevkhhtk9gm7auaxy3", // whispernode

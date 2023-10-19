@@ -1,11 +1,11 @@
 syntax = "proto3";
-package fanfury.airdrop.v1beta1;
+package merlin.airdrop.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/any.proto";
-import "fanfury/airdrop/v1beta1/allocation.proto";
+import "merlin/airdrop/v1beta1/allocation.proto";
 
-option go_package = "github.com/furysport/fanfury-chain/x/airdrop/types";
+option go_package = "github.com/merlin-network/merlin-chain/x/airdrop/types";
 
 // Msg defines the staking Msg service.
 service Msg {

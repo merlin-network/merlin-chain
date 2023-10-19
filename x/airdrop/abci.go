@@ -1,7 +1,7 @@
 package airdrop
 
 import (
-	"github.com/furysport/fanfury-chain/x/airdrop/keeper"
+	"github.com/merlin-network/merlin-chain/x/airdrop/keeper"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

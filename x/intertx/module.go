@@ -10,9 +10,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/furysport/fanfury-chain/x/intertx/client/cli"
-	"github.com/furysport/fanfury-chain/x/intertx/keeper"
-	"github.com/furysport/fanfury-chain/x/intertx/types"
+	"github.com/merlin-network/merlin-chain/x/intertx/client/cli"
+	"github.com/merlin-network/merlin-chain/x/intertx/keeper"
+	"github.com/merlin-network/merlin-chain/x/intertx/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

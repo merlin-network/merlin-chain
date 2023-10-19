@@ -1,58 +1,58 @@
 version: "3"
 
 services:
-  fanfurydnode0:
-    container_name: fanfurydnode0
-    image: "tendermint/fanfurydnode"
+  merlindnode0:
+    container_name: merlindnode0
+    image: "tendermint/merlindnode"
     ports:
       - "26656-26657:26656-26657"
     environment:
       - ID=0
-      - LOG=${LOG:-fanfuryd.log}
+      - LOG=${LOG:-merlind.log}
     volumes:
-      - ./build:/fanfuryd:Z
+      - ./build:/merlind:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.2
 
-  fanfurydnode1:
-    container_name: fanfurydnode1
-    image: "tendermint/fanfurydnode"
+  merlindnode1:
+    container_name: merlindnode1
+    image: "tendermint/merlindnode"
     ports:
       - "26659-26660:26656-26657"
     environment:
       - ID=1
-      - LOG=${LOG:-fanfuryd.log}
+      - LOG=${LOG:-merlind.log}
     volumes:
-      - ./build:/fanfuryd:Z
+      - ./build:/merlind:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.3
 
-  fanfurydnode2:
-    container_name: fanfurydnode2
-    image: "tendermint/fanfurydnode"
+  merlindnode2:
+    container_name: merlindnode2
+    image: "tendermint/merlindnode"
     environment:
       - ID=2
-      - LOG=${LOG:-fanfuryd.log}
+      - LOG=${LOG:-merlind.log}
     ports:
       - "26661-26662:26656-26657"
     volumes:
-      - ./build:/fanfuryd:Z
+      - ./build:/merlind:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.4
 
-  fanfurydnode3:
-    container_name: fanfurydnode3
-    image: "tendermint/fanfurydnode"
+  merlindnode3:
+    container_name: merlindnode3
+    image: "tendermint/merlindnode"
     environment:
       - ID=3
-      - LOG=${LOG:-fanfuryd.log}
+      - LOG=${LOG:-merlind.log}
     ports:
       - "26663-26664:26656-26657"
     volumes:
-      - ./build:/fanfuryd:Z
+      - ./build:/merlind:Z
     networks:
       localnet:
         ipv4_address: 192.168.10.5

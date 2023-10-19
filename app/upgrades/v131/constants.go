@@ -3,7 +3,7 @@ package v131
 import (
 	store "github.com/cosmos/cosmos-sdk/store/types"
 
-	"github.com/furysport/fanfury-chain/app/upgrades"
+	"github.com/merlin-network/merlin-chain/app/upgrades"
 )
 
 const (

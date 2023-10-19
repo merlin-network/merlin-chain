@@ -1,7 +1,7 @@
-package fanfury
+package merlin
 
 import (
-	"github.com/furysport/fanfury-chain/app/params"
+	"github.com/merlin-network/merlin-chain/app/params"
 
 	"github.com/cosmos/cosmos-sdk/std"
 )

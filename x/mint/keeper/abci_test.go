@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/x/mint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 )
@@ -15,7 +15,7 @@ func (suite *KeeperTestSuite) TestEndBlocker() {
 
 	defaultParams := suite.app.MintKeeper.GetParams(suite.ctx)
 	params := types.Params{
-		MintDenom:               "ufury",
+		MintDenom:               "umerlin",
 		GenesisBlockProvisions:  defaultParams.GenesisBlockProvisions,
 		ReductionPeriodInBlocks: 4000,
 		ReductionFactor:         sdk.NewDecWithPrec(5, 1),

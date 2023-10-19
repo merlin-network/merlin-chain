@@ -22,11 +22,11 @@ $BINARY config add-chains $PWD/network/relayer/interchain-acc-config/chains --ho
 $BINARY config add-paths $PWD/network/relayer/interchain-acc-config/paths --home $CHAIN_DIR/$RELAYER_DIR
 
 echo "Restoring accounts..."
-$BINARY keys restore test-1 test-1 "$MNEMONIC_1" --home $CHAIN_DIR/$RELAYER_DIR
-$BINARY keys restore test-2 test-2 "$MNEMONIC_2" --home $CHAIN_DIR/$RELAYER_DIR
+$BINARY keys restore highbury_710-1 rly1 "$MNEMONIC_1" --home $CHAIN_DIR/$RELAYER_DIR
+$BINARY keys restore test-2 rly2 "$MNEMONIC_2" --home $CHAIN_DIR/$RELAYER_DIR
 
 echo "Initializing light clients for both chains..."
-$BINARY light init test-1 -f --home $CHAIN_DIR/$RELAYER_DIR
+$BINARY light init highbury_710-1 -f --home $CHAIN_DIR/$RELAYER_DIR
 $BINARY light init test-2 -f --home $CHAIN_DIR/$RELAYER_DIR
 
 echo "Linking both chains..."

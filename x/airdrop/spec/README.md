@@ -45,7 +45,7 @@ type MsgSetAllocation struct {
 ### MsgClaimAllocation
 
 `MsgClaimAllocation` describes the message to claim airdrop allocation allocated to different network address.
-RewardAddress is the fanfury chain address that receives allocation.
+RewardAddress is the merlin chain address that receives allocation.
 
 ```go
 type MsgClaimAllocation struct {

@@ -26,10 +26,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/furysport/fanfury-chain/x/mint/client/cli"
-	"github.com/furysport/fanfury-chain/x/mint/keeper"
-	"github.com/furysport/fanfury-chain/x/mint/simulation"
-	"github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/x/mint/client/cli"
+	"github.com/merlin-network/merlin-chain/x/mint/keeper"
+	"github.com/merlin-network/merlin-chain/x/mint/simulation"
+	"github.com/merlin-network/merlin-chain/x/mint/types"
 )
 
 var (

@@ -1,4 +1,4 @@
-package fanfury
+package merlin
 
 import (
 	"encoding/json"
@@ -13,10 +13,10 @@ import (
 	dbm "github.com/tendermint/tm-db"
 )
 
-func setup(withGenesis bool, invCheckPeriod uint) (*FanfuryApp, GenesisState) {
+func setup(withGenesis bool, invCheckPeriod uint) (*MerlinApp, GenesisState) {
 	db := dbm.NewMemDB()
 	encCdc := MakeEncodingConfig()
-	app := NewFanfuryApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, invCheckPeriod, encCdc, simapp.EmptyAppOptions{})
+	app := NewMerlinApp(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, invCheckPeriod, encCdc, simapp.EmptyAppOptions{})
 	if withGenesis {
 		return app, NewDefaultGenesisState()
 	}
@@ -24,7 +24,7 @@ func setup(withGenesis bool, invCheckPeriod uint) (*FanfuryApp, GenesisState) {
 }
 
 // Setup initializes a new SimApp. A Nop logger is set in SimApp.
-func Setup(isCheckTx bool) *FanfuryApp {
+func Setup(isCheckTx bool) *MerlinApp {
 	app, genesisState := setup(!isCheckTx, 5)
 	if !isCheckTx {
 		// init chain must be called to stop deliverState from being nil
@@ -47,7 +47,7 @@ func Setup(isCheckTx bool) *FanfuryApp {
 }
 
 func SimAppConstructor(val network.Validator) servertypes.Application {
-	return NewFanfuryApp(
+	return NewMerlinApp(
 		val.Ctx.Logger, dbm.NewMemDB(), nil, true, make(map[int64]bool),
 		val.Ctx.Config.RootDir, 0, MakeEncodingConfig(), simapp.EmptyAppOptions{},
 		bam.SetPruning(storetypes.NewPruningOptionsFromString(val.AppConfig.Pruning)),

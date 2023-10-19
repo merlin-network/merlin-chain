@@ -7,8 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	appparams "github.com/furysport/fanfury-chain/app/params"
-	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
+	appparams "github.com/merlin-network/merlin-chain/app/params"
+	airdroptypes "github.com/merlin-network/merlin-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -39,7 +39,7 @@ func AllocateStarsAirdropCmd() *cobra.Command {
 		Short: "Allocate stars airdrop",
 		Long: `Allocate stars airdrop.
 Example:
-	fanfuryd tx airdrop allocate-stars-airdrop Airdrop_HuahuaPunks_Feuille_1.csv 0 500 --from=validator --keyring-backend=test --chain-id=testing --home=$HOME/.fanfuryd/ --yes --broadcast-mode=block --gas=10000000
+	merlind tx airdrop allocate-stars-airdrop Airdrop_HuahuaPunks_Feuille_1.csv 0 500 --from=validator --keyring-backend=test --chain-id=testing --home=$HOME/.merlind/ --yes --broadcast-mode=block --gas=10000000
 `,
 		Args: cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {

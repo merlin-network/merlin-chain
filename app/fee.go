@@ -1,10 +1,10 @@
-package fanfury
+package merlin
 
 import (
 	"fmt"
 
-	airdropkeeper "github.com/furysport/fanfury-chain/x/airdrop/keeper"
-	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
+	airdropkeeper "github.com/merlin-network/merlin-chain/x/airdrop/keeper"
+	airdroptypes "github.com/merlin-network/merlin-chain/x/airdrop/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	ante "github.com/cosmos/cosmos-sdk/x/auth/ante"

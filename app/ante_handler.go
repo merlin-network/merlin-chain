@@ -1,9 +1,9 @@
-package fanfury
+package merlin
 
 import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
-	airdropkeeper "github.com/furysport/fanfury-chain/x/airdrop/keeper"
+	airdropkeeper "github.com/merlin-network/merlin-chain/x/airdrop/keeper"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

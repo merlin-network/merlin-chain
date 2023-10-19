@@ -1,4 +1,4 @@
-package fanfury
+package merlin
 
 import (
 	"errors"

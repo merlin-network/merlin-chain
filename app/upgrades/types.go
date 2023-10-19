@@ -1,7 +1,7 @@
 package upgrades
 
 import (
-	"github.com/furysport/fanfury-chain/app/keepers"
+	"github.com/merlin-network/merlin-chain/app/keepers"
 	store "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"

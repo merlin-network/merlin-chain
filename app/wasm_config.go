@@ -1,4 +1,4 @@
-package fanfury
+package merlin
 
 import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"

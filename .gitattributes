@@ -1,2 +1,2 @@
-testnet/fanfury-testnet-v3/genesis.json filter=lfs diff=lfs merge=lfs -text
-mainnet/fanfury-1/genesis.json filter=lfs diff=lfs merge=lfs -text
+testnet/merlin-testnet-v3/genesis.json filter=lfs diff=lfs merge=lfs -text
+mainnet/merlin-1/genesis.json filter=lfs diff=lfs merge=lfs -text

@@ -5,7 +5,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/furysport/fanfury-chain/x/airdrop/types"
+	"github.com/merlin-network/merlin-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"

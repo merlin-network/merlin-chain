@@ -1,4 +1,4 @@
-package fanfury
+package merlin
 
 import (
 	"fmt"
@@ -9,17 +9,17 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/furysport/fanfury-chain/app/keepers"
-	"github.com/furysport/fanfury-chain/app/upgrades"
-	v130 "github.com/furysport/fanfury-chain/app/upgrades/v130"
-	v131 "github.com/furysport/fanfury-chain/app/upgrades/v131"
-	v140 "github.com/furysport/fanfury-chain/app/upgrades/v140"
-	airdrop "github.com/furysport/fanfury-chain/x/airdrop"
-	airdropkeeper "github.com/furysport/fanfury-chain/x/airdrop/keeper"
-	airdroptypes "github.com/furysport/fanfury-chain/x/airdrop/types"
-	"github.com/furysport/fanfury-chain/x/mint"
-	mintkeeper "github.com/furysport/fanfury-chain/x/mint/keeper"
-	minttypes "github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/app/keepers"
+	"github.com/merlin-network/merlin-chain/app/upgrades"
+	v130 "github.com/merlin-network/merlin-chain/app/upgrades/v130"
+	v131 "github.com/merlin-network/merlin-chain/app/upgrades/v131"
+	v140 "github.com/merlin-network/merlin-chain/app/upgrades/v140"
+	airdrop "github.com/merlin-network/merlin-chain/x/airdrop"
+	airdropkeeper "github.com/merlin-network/merlin-chain/x/airdrop/keeper"
+	airdroptypes "github.com/merlin-network/merlin-chain/x/airdrop/types"
+	"github.com/merlin-network/merlin-chain/x/mint"
+	mintkeeper "github.com/merlin-network/merlin-chain/x/mint/keeper"
+	minttypes "github.com/merlin-network/merlin-chain/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
@@ -112,11 +112,11 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	intertx "github.com/furysport/fanfury-chain/x/intertx"
-	intertxkeeper "github.com/furysport/fanfury-chain/x/intertx/keeper"
-	intertxtypes "github.com/furysport/fanfury-chain/x/intertx/types"
+	intertx "github.com/merlin-network/merlin-chain/x/intertx"
+	intertxkeeper "github.com/merlin-network/merlin-chain/x/intertx/keeper"
+	intertxtypes "github.com/merlin-network/merlin-chain/x/intertx/types"
 
-	fanfuryappparams "github.com/furysport/fanfury-chain/app/params"
+	merlinappparams "github.com/merlin-network/merlin-chain/app/params"
 	"github.com/strangelove-ventures/packet-forward-middleware/v2/router"
 	routerkeeper "github.com/strangelove-ventures/packet-forward-middleware/v2/router/keeper"
 	routertypes "github.com/strangelove-ventures/packet-forward-middleware/v2/router/types"
@@ -130,7 +130,7 @@ import (
 	_ "github.com/cosmos/cosmos-sdk/client/docs/statik"
 )
 
-const appName = "FanfuryApp"
+const appName = "MerlinApp"
 
 var (
 	// If EnabledSpecificProposals is "", and this is "true", then enable all x/wasm proposals.
@@ -243,14 +243,14 @@ var (
 )
 
 var (
-	_ simapp.App              = (*FanfuryApp)(nil)
-	_ servertypes.Application = (*FanfuryApp)(nil)
+	_ simapp.App              = (*MerlinApp)(nil)
+	_ servertypes.Application = (*MerlinApp)(nil)
 )
 
-// FanfuryApp extends an ABCI application, but with most of its parameters exported.
+// MerlinApp extends an ABCI application, but with most of its parameters exported.
 // They are exported for convenience in creating helper functions, as object
 // capabilities aren't needed for testing.
-type FanfuryApp struct { // nolint: golint
+type MerlinApp struct { // nolint: golint
 	*baseapp.BaseApp
 	keepers.AppKeepers
 
@@ -279,21 +279,21 @@ func init() {
 		stdlog.Println("Failed to get home dir %2", err)
 	}
 
-	DefaultNodeHome = filepath.Join(userHomeDir, ".fanfuryd")
+	DefaultNodeHome = filepath.Join(userHomeDir, ".merlind")
 }
 
-// NewFanfuryApp returns a reference to an initialized NxtPop.
-func NewFanfuryApp(
+// NewMerlinApp returns a reference to an initialized NxtPop.
+func NewMerlinApp(
 	logger log.Logger,
 	db dbm.DB, traceStore io.Writer,
 	loadLatest bool,
 	skipUpgradeHeights map[int64]bool,
 	homePath string,
 	invCheckPeriod uint,
-	encodingConfig fanfuryappparams.EncodingConfig,
+	encodingConfig merlinappparams.EncodingConfig,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *FanfuryApp {
+) *MerlinApp {
 
 	appCodec := encodingConfig.Marshaler
 	legacyAmino := encodingConfig.Amino
@@ -319,7 +319,7 @@ func NewFanfuryApp(
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
 
-	app := &FanfuryApp{
+	app := &MerlinApp{
 		BaseApp:           bApp,
 		legacyAmino:       legacyAmino,
 		appCodec:          appCodec,
@@ -778,20 +778,20 @@ func NewFanfuryApp(
 }
 
 // Name returns the name of the App
-func (app *FanfuryApp) Name() string { return app.BaseApp.Name() }
+func (app *MerlinApp) Name() string { return app.BaseApp.Name() }
 
 // BeginBlocker application updates every begin block
-func (app *FanfuryApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *MerlinApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker application updates every end block
-func (app *FanfuryApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *MerlinApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // InitChainer application update at chain initialization
-func (app *FanfuryApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *MerlinApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState GenesisState
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -803,12 +803,12 @@ func (app *FanfuryApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) a
 }
 
 // LoadHeight loads a particular height
-func (app *FanfuryApp) LoadHeight(height int64) error {
+func (app *MerlinApp) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
 // ModuleAccountAddrs returns all the app's module account addresses.
-func (app *FanfuryApp) ModuleAccountAddrs() map[string]bool {
+func (app *MerlinApp) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		modAccAddrs[authtypes.NewModuleAddress(acc).String()] = true
@@ -817,11 +817,11 @@ func (app *FanfuryApp) ModuleAccountAddrs() map[string]bool {
 	return modAccAddrs
 }
 
-// LegacyAmino returns FanfuryApp's amino codec.
+// LegacyAmino returns MerlinApp's amino codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *FanfuryApp) LegacyAmino() *codec.LegacyAmino {
+func (app *MerlinApp) LegacyAmino() *codec.LegacyAmino {
 	return app.legacyAmino
 }
 
@@ -829,52 +829,52 @@ func (app *FanfuryApp) LegacyAmino() *codec.LegacyAmino {
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *FanfuryApp) AppCodec() codec.Codec {
+func (app *MerlinApp) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
 // InterfaceRegistry returns NxtPop's InterfaceRegistry
-func (app *FanfuryApp) InterfaceRegistry() types.InterfaceRegistry {
+func (app *MerlinApp) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
 // GetKey returns the KVStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *FanfuryApp) GetKey(storeKey string) *sdk.KVStoreKey {
+func (app *MerlinApp) GetKey(storeKey string) *sdk.KVStoreKey {
 	return app.keys[storeKey]
 }
 
 // GetTKey returns the TransientStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *FanfuryApp) GetTKey(storeKey string) *sdk.TransientStoreKey {
+func (app *MerlinApp) GetTKey(storeKey string) *sdk.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
 // GetMemKey returns the MemStoreKey for the provided mem key.
 //
 // NOTE: This is solely used for testing purposes.
-func (app *FanfuryApp) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
+func (app *MerlinApp) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
 // GetSubspace returns a param subspace for a given module name.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *FanfuryApp) GetSubspace(moduleName string) paramstypes.Subspace {
+func (app *MerlinApp) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
 // SimulationManager implements the SimulationApp interface
-func (app *FanfuryApp) SimulationManager() *module.SimulationManager {
+func (app *MerlinApp) SimulationManager() *module.SimulationManager {
 	return app.sm
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *FanfuryApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *MerlinApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	rpc.RegisterRoutes(clientCtx, apiSvr.Router)
 	// Register legacy tx routes.
@@ -895,37 +895,37 @@ func (app *FanfuryApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.AP
 }
 
 // RegisterTxService implements the Application.RegisterTxService method.
-func (app *FanfuryApp) RegisterTxService(clientCtx client.Context) {
+func (app *MerlinApp) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
 // RegisterTendermintService implements the Application.RegisterTendermintService method.
-func (app *FanfuryApp) RegisterTendermintService(clientCtx client.Context) {
+func (app *MerlinApp) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.interfaceRegistry)
 }
 
 // GetBaseApp implements the BaseApp
-func (app *FanfuryApp) GetBaseApp() *baseapp.BaseApp {
+func (app *MerlinApp) GetBaseApp() *baseapp.BaseApp {
 	return app.BaseApp
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *FanfuryApp) GetStakingKeeper() stakingkeeper.Keeper {
+func (app *MerlinApp) GetStakingKeeper() stakingkeeper.Keeper {
 	return app.StakingKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *FanfuryApp) GetIBCKeeper() *ibckeeper.Keeper {
+func (app *MerlinApp) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *FanfuryApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
+func (app *MerlinApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.ScopedIBCKeeper
 }
 
 // GetBaseApp implements the StakingKeeper
-func (app *FanfuryApp) GetTxConfig() client.TxConfig {
+func (app *MerlinApp) GetTxConfig() client.TxConfig {
 	return MakeEncodingConfig().TxConfig
 }
 
@@ -973,7 +973,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 }
 
 // configure store loader that checks if version == upgradeHeight and applies store upgrades
-func (app *FanfuryApp) setupUpgradeStoreLoaders() {
+func (app *MerlinApp) setupUpgradeStoreLoaders() {
 	upgradeInfo, err := app.UpgradeKeeper.ReadUpgradeInfoFromDisk()
 	if err != nil {
 		panic(fmt.Sprintf("failed to read upgrade info from disk %s", err))
@@ -990,7 +990,7 @@ func (app *FanfuryApp) setupUpgradeStoreLoaders() {
 	}
 }
 
-func (app *FanfuryApp) setupUpgradeHandlers() {
+func (app *MerlinApp) setupUpgradeHandlers() {
 	for _, upgrade := range Upgrades {
 		app.UpgradeKeeper.SetUpgradeHandler(
 			upgrade.UpgradeName,

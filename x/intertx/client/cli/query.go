@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/furysport/fanfury-chain/x/intertx/types"
+	"github.com/merlin-network/merlin-chain/x/intertx/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"

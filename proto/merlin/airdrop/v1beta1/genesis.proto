@@ -1,15 +1,15 @@
 syntax = "proto3";
-package fanfury.airdrop.v1beta1;
+package merlin.airdrop.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "cosmos/base/v1beta1/coin.proto";
 import "cosmos/bank/v1beta1/genesis.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
-import "fanfury/airdrop/v1beta1/allocation.proto";
-import "fanfury/airdrop/v1beta1/params.proto";
+import "merlin/airdrop/v1beta1/allocation.proto";
+import "merlin/airdrop/v1beta1/params.proto";
 
-option go_package = "github.com/furysport/fanfury-chain/x/airdrop/types";
+option go_package = "github.com/merlin-network/merlin-chain/x/airdrop/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

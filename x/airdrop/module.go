@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/furysport/fanfury-chain/x/airdrop/client/cli"
-	"github.com/furysport/fanfury-chain/x/airdrop/keeper"
-	"github.com/furysport/fanfury-chain/x/airdrop/types"
+	"github.com/merlin-network/merlin-chain/x/airdrop/client/cli"
+	"github.com/merlin-network/merlin-chain/x/airdrop/keeper"
+	"github.com/merlin-network/merlin-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

@@ -4,8 +4,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 
-	appparams "github.com/furysport/fanfury-chain/app/params"
-	"github.com/furysport/fanfury-chain/x/airdrop/types"
+	appparams "github.com/merlin-network/merlin-chain/app/params"
+	"github.com/merlin-network/merlin-chain/x/airdrop/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/bech32"

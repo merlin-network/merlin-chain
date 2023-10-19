@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/furysport/fanfury-chain/x/mint/types"
+	"github.com/merlin-network/merlin-chain/x/mint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

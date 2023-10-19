@@ -31,14 +31,14 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	fanfury "github.com/furysport/fanfury-chain/app"
-	"github.com/furysport/fanfury-chain/app/params"
+	merlin "github.com/merlin-network/merlin-chain/app"
+	"github.com/merlin-network/merlin-chain/app/params"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the
 // main function.
 func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
-	encodingConfig := fanfury.MakeEncodingConfig()
+	encodingConfig := merlin.MakeEncodingConfig()
 	initClientCtx := client.Context{}.
 		WithCodec(encodingConfig.Marshaler).
 		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
@@ -46,11 +46,11 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 		WithLegacyAmino(encodingConfig.Amino).
 		WithInput(os.Stdin).
 		WithAccountRetriever(types.AccountRetriever{}).
-		WithHomeDir(fanfury.DefaultNodeHome).
+		WithHomeDir(merlin.DefaultNodeHome).
 		WithViper("")
 
 	rootCmd := &cobra.Command{
-		Use:   "fanfuryd",
+		Use:   "merlind",
 		Short: "Stargate Cosmos Hub App",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			initClientCtx, err := client.ReadPersistentCommandFlags(initClientCtx, cmd.Flags())
@@ -104,28 +104,28 @@ func initRootCmd(rootCmd *cobra.Command, encodingConfig params.EncodingConfig) {
 		encCfg: encodingConfig,
 	}
 	rootCmd.AddCommand(
-		genutilcli.InitCmd(fanfury.ModuleBasics, fanfury.DefaultNodeHome),
-		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, fanfury.DefaultNodeHome),
-		genutilcli.GenTxCmd(fanfury.ModuleBasics, encodingConfig.TxConfig, banktypes.GenesisBalancesIterator{}, fanfury.DefaultNodeHome),
-		genutilcli.ValidateGenesisCmd(fanfury.ModuleBasics),
-		PrepareGenesisCmd(fanfury.DefaultNodeHome, fanfury.ModuleBasics),
+		genutilcli.InitCmd(merlin.ModuleBasics, merlin.DefaultNodeHome),
+		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, merlin.DefaultNodeHome),
+		genutilcli.GenTxCmd(merlin.ModuleBasics, encodingConfig.TxConfig, banktypes.GenesisBalancesIterator{}, merlin.DefaultNodeHome),
+		genutilcli.ValidateGenesisCmd(merlin.ModuleBasics),
+		PrepareGenesisCmd(merlin.DefaultNodeHome, merlin.ModuleBasics),
 		ExportRichestSnapshotCmd(),
-		AddGenesisAccountCmd(fanfury.DefaultNodeHome),
+		AddGenesisAccountCmd(merlin.DefaultNodeHome),
 		tmcli.NewCompletionCmd(rootCmd, true),
-		testnetCmd(fanfury.ModuleBasics, banktypes.GenesisBalancesIterator{}),
+		testnetCmd(merlin.ModuleBasics, banktypes.GenesisBalancesIterator{}),
 		debug.Cmd(),
 		config.Cmd(),
 		pruning.PruningCmd(ac.newApp),
 	)
 
-	server.AddCommands(rootCmd, fanfury.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
+	server.AddCommands(rootCmd, merlin.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
 
 	// add keybase, auxiliary RPC, query, and tx child commands
 	rootCmd.AddCommand(
 		rpc.StatusCommand(),
 		queryCommand(),
 		txCommand(),
-		keys.Commands(fanfury.DefaultNodeHome),
+		keys.Commands(merlin.DefaultNodeHome),
 	)
 }
 
@@ -151,7 +151,7 @@ func queryCommand() *cobra.Command {
 		authcmd.QueryTxCmd(),
 	)
 
-	fanfury.ModuleBasics.AddQueryCommands(cmd)
+	merlin.ModuleBasics.AddQueryCommands(cmd)
 	cmd.PersistentFlags().String(flags.FlagChainID, "", "The network chain ID")
 
 	return cmd
@@ -178,7 +178,7 @@ func txCommand() *cobra.Command {
 		authcmd.GetDecodeCommand(),
 	)
 
-	fanfury.ModuleBasics.AddTxCommands(cmd)
+	merlin.ModuleBasics.AddTxCommands(cmd)
 	cmd.PersistentFlags().String(flags.FlagChainID, "", "The network chain ID")
 
 	return cmd
@@ -221,7 +221,7 @@ func (ac appCreator) newApp(
 		panic(err)
 	}
 
-	return fanfury.NewFanfuryApp(
+	return merlin.NewMerlinApp(
 		logger, db, traceStore, true, skipUpgradeHeights,
 		cast.ToString(appOpts.Get(flags.FlagHome)),
 		cast.ToUint(appOpts.Get(server.FlagInvCheckPeriod)),
@@ -261,7 +261,7 @@ func (ac appCreator) appExport(
 		loadLatest = true
 	}
 
-	fanfuryApp := fanfury.NewFanfuryApp(
+	merlinApp := merlin.NewMerlinApp(
 		logger,
 		db,
 		traceStore,
@@ -274,10 +274,10 @@ func (ac appCreator) appExport(
 	)
 
 	if height != -1 {
-		if err := fanfuryApp.LoadHeight(height); err != nil {
+		if err := merlinApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	}
 
-	return fanfuryApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
+	return merlinApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
 }

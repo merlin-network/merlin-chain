@@ -1,4 +1,4 @@
-package fanfury_test
+package merlin_test
 
 import (
 	"encoding/json"
@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	fanfury "github.com/furysport/fanfury-chain/app"
+	merlin "github.com/merlin-network/merlin-chain/app"
 
-	"github.com/furysport/fanfury-chain/app/helpers"
+	"github.com/merlin-network/merlin-chain/app/helpers"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	"github.com/tendermint/tendermint/libs/rand"
@@ -26,7 +26,7 @@ func init() {
 }
 
 // Profile with:
-// /usr/local/go/bin/go test -benchmem -run=^$ github.com/cosmos/cosmos-sdk/FanfuryApp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
+// /usr/local/go/bin/go test -benchmem -run=^$ github.com/cosmos/cosmos-sdk/MerlinApp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
 func BenchmarkFullAppSimulation(b *testing.B) {
 	config, db, dir, logger, _, err := simapp.SetupSimulation("goleveldb-app-sim", "Simulation")
 	if err != nil {
@@ -41,7 +41,7 @@ func BenchmarkFullAppSimulation(b *testing.B) {
 		}
 	}()
 
-	app := fanfury.NewFanfuryApp(logger, db, nil, true, map[int64]bool{}, fanfury.DefaultNodeHome, simapp.FlagPeriodValue, fanfury.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
+	app := merlin.NewMerlinApp(logger, db, nil, true, map[int64]bool{}, merlin.DefaultNodeHome, simapp.FlagPeriodValue, merlin.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
 
 	// Run randomized simulation:w
 	_, simParams, simErr := simulation.SimulateFromSeed(
@@ -106,7 +106,7 @@ func TestAppStateDeterminism(t *testing.T) {
 			}
 
 			db := dbm.NewMemDB()
-			app := fanfury.NewFanfuryApp(logger, db, nil, true, map[int64]bool{}, fanfury.DefaultNodeHome, simapp.FlagPeriodValue, fanfury.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
+			app := merlin.NewMerlinApp(logger, db, nil, true, map[int64]bool{}, merlin.DefaultNodeHome, simapp.FlagPeriodValue, merlin.MakeEncodingConfig(), simapp.EmptyAppOptions{}, interBlockCacheOpt())
 
 			fmt.Printf(
 				"running non-determinism simulation; seed %d: %d/%d, attempt: %d/%d\n",

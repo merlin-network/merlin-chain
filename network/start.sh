@@ -1,9 +1,9 @@
 #!/bin/bash
 
-BINARY=icad
-BINARY_T=fanfuryd
+BINARY=merlin
+BINARY_T=merlind
 CHAIN_DIR=./data
-CHAINID_1=test-1
+CHAINID_1=highbury_710-1
 CHAINID_2=test-2
 GRPCPORT_1=8090
 GRPCPORT_2=9090
